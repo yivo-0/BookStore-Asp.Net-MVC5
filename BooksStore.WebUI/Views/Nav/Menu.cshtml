@@ -1,0 +1,27 @@
+﻿@model IEnumerable<string>
+
+@*@Html.ActionLink("Home", "List", "Book")*@
+
+<div class="nav-item dropdown">
+    <a class="text-link-light " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        BROWSE
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        @foreach (var link in Model)
+        {
+            @Html.RouteLink(link, new
+        {
+            controller = "Book",
+            action = "List",
+            genre = link,
+            page = 1
+        },
+          new {
+              @class="  text-link-dark" 
+
+          })
+            <br />
+        }
+    </div>
+</div>
+@*@class = link == ViewBag.SelectedGenre ? "selected dropdown-item text-link-dark" : null*@

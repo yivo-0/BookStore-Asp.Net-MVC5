@@ -1,0 +1,20 @@
+﻿@model BooksStore.WebUI.Models.BooksListViewModel
+
+@{
+    ViewBag.Title = "Books";
+}
+
+
+<div class="products clearfix">
+    @foreach (var p in Model.Books)
+    {
+        Html.RenderPartial("BookSummary", p);
+    }
+</div>
+
+
+
+<ul class="pagination modal-1">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("List",
+   new { page = x, genre = Model.CurrentGenre }))
+</ul>

@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @*@Styles.Render("~/Content/css")*@
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href='@Url.Content("~/Content/bootstrap.min.css")' rel="stylesheet" type="text/css" />
+    <link href='@Url.Content("~/Content/MyStyle.css")' rel="stylesheet" type="text/css" />
+    <script src='@Url.Content("~/Scripts/bootstrap.min.js")'></script>
+    <script src='@Url.Content("~/Scripts/jquery-3.3.1.min.js")'></script>
+
+
+</head>
+<body>
+
+    <nav class="navbar navbar-dark navbar-expand-lg "id="head" style="background-color: #000;">
+        <img class="navbar-brand navbar-brand-my mar-left" height="40" width="40" src="~/Styles/Logo/logo.svg">
+        <a class="navbar-brand navbar-brand-my" href="/">Bookshop</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+                @*<li>
+
+                    </li>*@
+
+            </ul>
+            <form class=" form-inline my-2 my-lg-0 ">
+                <input class="form-control mr-sm-2    search-border-left" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn bg-light search-btn my-2 my-sm-0" type="submit">
+                    <img height="20" width="20" src="~/Styles/Icons/search.svg">
+                </button>
+            </form>
+
+
+            @{Html.RenderAction("Menu", "Nav");
+            }
+
+
+            <div class="dropdown">
+                <a class="btn" style="box-shadow:none" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="inverted" height="25" width="25" src="~/Styles/Icons/shopping-cart.svg">
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <div class="nav-item my-2 my-lg-0">
+                        @{Html.RenderAction("Summary", "Cart");}
+                    </div>
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="dropleft">
+                <a class="btn mar-right " style="box-shadow:none" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img class="inverted" height="24" width="24" src="~/Styles/Icons/account.svg">
+                </a>
+                <div class="dropdown-menu  dropdown-menu-md-right" aria-labelledby="dropdownMenuButton">
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            <span class="dropdown-item-text ">Hello! @User.Identity.Name</span>
+                            if (User.IsInRole("admin"))
+                            {
+                                <a class="dropdown-item text-link" href="/Admin/Index">Admin Panel</a>
+                            }
+                            <a class="dropdown-item  text-link" href="/Account/Logoff">Logoff</a>
+                        }
+                        else
+                        { <a class="dropdown-item  text-link" href="/Account/Login">Login</a> }
+
+
+                    }
+                </div>
+            </div>
+
+
+        </div>
+    </nav>
+
+    <div class="container body-content" id="content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - BookStore</p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

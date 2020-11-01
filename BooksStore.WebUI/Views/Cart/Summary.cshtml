@@ -1,0 +1,10 @@
+﻿@model BooksStore.Domain.Entities.Cart
+
+<div id="cart">
+    <span class="dropdown-item-text">
+        <b>Your cart:</b></span>
+        <span class="dropdown-item-text">Count: @Model.Lines.Sum(x => x.Quantity) item(s)</span>
+        <span class="dropdown-item-text">Price: @Model.ComputeTotalValue() $ </span>
+        <a class="dropdown-item align-text-top text-link" href="/Cart/Index">Checkout</a>
+
+</div>

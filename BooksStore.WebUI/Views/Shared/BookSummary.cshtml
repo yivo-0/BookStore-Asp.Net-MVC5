@@ -1,0 +1,30 @@
+﻿@model BooksStore.Domain.Entities.Book
+
+
+<div class="product-item product-wrapper">
+
+    @if (Model.ImageData != null)
+    {
+        <img class=" ls-is-cached lazyloaded product-img" width="130" height="220" src="@Url.Action("GetImage", "Book", new { Model.BookID })" />
+    }
+
+        <div class="product-list">
+            <h2 class=" leading-tight">
+                <a class="text-link-dark" href="@Url.Action( "Detail", "Book", new { Model.BookID })">    @Model.Name </a>
+            </h2>
+
+            <h4 style="font-size: 0.8rem;"> @Model.Author</h4>
+            <span class="price"> @Model.Price $ </span>
+
+            @using (Html.BeginForm("AddToCart", "Cart", new { @class = "product-form" }))
+            {@Html.HiddenFor(x => x.BookID)
+            @Html.Hidden("returnUrl", Request.Url.PathAndQuery)
+
+
+            <button class=" button" style= "width:80%; height: 38.979166px; margin-left: 15px;" name="button" type="submit">
+
+               <img id="res" style="    height: 25px;" width="20" height="20" src="~/Styles/Icons/shopping-cart.svg"> <span style="    font-size: 90%;">ADD TO CART</span>
+            </button>
+        }
+        </div>
+</div>
